@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import { memo } from 'react';
+import { connect } from 'react-redux';
+import { Redirect, Route, Switch } from 'react-router';
 
-function App() {
+import './App.css';
+import Header from './components/header';
+import Home from './pages/home';
+import SignIn from './pages/signIn';
+import Shop from './pages/shop';
+
+function App({ user }) {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='container'>
+      <Header />
+      <Switch>
+        <Route path='/' exact component={Home} />
+        <Route path='/shop' component={Shop} />
+        <Route path='/sign-in' render={() => (user ? <Redirect to='/' /> : <SignIn />)} />
+      </Switch>
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = ({ auth }) => ({ user: auth.user });
+
+export default connect(mapStateToProps)(memo(App));

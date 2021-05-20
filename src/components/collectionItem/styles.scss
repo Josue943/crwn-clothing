@@ -1,0 +1,36 @@
+.collection-item {
+  height: 350px;
+  width: 22%;
+  max-width: 330px;
+}
+
+.collection-img {
+  align-items: flex-end;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  height: 95%;
+  padding: 25px;
+  width: 100%;
+
+  &:hover {
+    opacity: 0.9;
+    .btn {
+      display: unset;
+      opacity: 0.9;
+    }
+  }
+
+  .btn {
+    opacity: 0.8;
+    display: none;
+  }
+}
+
+.collection-footer {
+  display: flex;
+  font-size: 1.7rem;
+  font-weight: bold;
+  justify-content: space-between;
+  padding: 4px;
+}
