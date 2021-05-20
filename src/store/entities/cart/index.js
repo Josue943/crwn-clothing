@@ -15,8 +15,8 @@ const cartReducer = (state = initialState, action) => {
       return {
         ...state,
         cartItems: state.cartItems[payload.id]
-          ? state.cartItems.map(i => (i.id === payload.id ? { ...i, quantity: i.quantity + 1 } : i))
-          : { ...state.cartItems, [payload.id]: { ...payload, quantity: 1 } },
+          ? { ...state.cartItems, [payload.id]: { ...state.cartItems[payload.id], quantity: state.cartItems[payload.id].quantity + 1 } }
+          : { ...state.cartItems, [payload.id]: { ...payload, quantity: 1, added: new Date() } },
       };
 
     default:
