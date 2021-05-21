@@ -18,30 +18,3 @@
     font-weight: bold;
   }
 }
-
-.cart-icon-container {
-  align-items: center;
-  display: flex;
-  height: 40px;
-  justify-content: flex-end;
-  margin-left: 20px;
-  position: relative;
-  width: 40px;
-
-  .cart-icon {
-    height: 24px;
-    width: 24px;
-    cursor: pointer;
-  }
-
-  .counter {
-    position: absolute;
-    font-size: 1.1rem;
-    font-weight: bold;
-    text-align: center;
-    width: 16px;
-    height: 16px;
-    bottom: 9px;
-    left: 20px;
-  }
-}

@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { useHistory, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import './styles.scss';
 

@@ -1,8 +1,9 @@
-import { TOGGLE_CART, ADD_ITEM } from './types';
+import { TOGGLE_CART, ADD_ITEM, CLEAR_ITEM, DECREASE_ITEM } from './types';
+import { addItemToCart, decreaseItemFromCart } from './utils';
 
 const initialState = {
   hidden: true,
-  cartItems: {},
+  cartItems: [],
 };
 
 const cartReducer = (state = initialState, action) => {
@@ -14,10 +15,14 @@ const cartReducer = (state = initialState, action) => {
     case ADD_ITEM:
       return {
         ...state,
-        cartItems: state.cartItems[payload.id]
-          ? { ...state.cartItems, [payload.id]: { ...state.cartItems[payload.id], quantity: state.cartItems[payload.id].quantity + 1 } }
-          : { ...state.cartItems, [payload.id]: { ...payload, quantity: 1, added: new Date() } },
+        cartItems: addItemToCart(state.cartItems, payload),
       };
+
+    case CLEAR_ITEM:
+      return { ...state, cartItems: state.cartItems.filter(cartItem => cartItem.id !== payload.id) };
+
+    case DECREASE_ITEM:
+      return { ...state, cartItems: decreaseItemFromCart(state.cartItems, payload) };
 
     default:
       return state;

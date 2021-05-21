@@ -1,7 +1,7 @@
 import { LOGIN } from './types';
 
 const initialState = {
-  user: false,
+  currentUser: false,
   isLoading: true,
 };
 
@@ -9,7 +9,7 @@ const authReducer = (state = initialState, action) => {
   const { payload, type } = action;
   switch (type) {
     case LOGIN:
-      return { user: payload, isLoading: false };
+      return { currentUser: payload, isLoading: false };
 
     default:
       return state;

@@ -4,11 +4,14 @@ import { connect } from 'react-redux';
 
 import './styles.scss';
 import CartDropDown from '../cartDropDown';
+import CartIcon from '../cartIcon';
+import { createStructuredSelector } from 'reselect';
 import { login } from '../../store/entities/auth/actions';
 import { ReactComponent as Logo } from '../../assets/images/crown.svg';
-import { ReactComponent as Bag } from '../../assets/images/shopping-bag.svg';
+import { selectCartHidden } from '../../store/entities/cart/selectors';
+import { selectCurrentUser } from '../../store/entities/auth/selectors';
 
-const Header = ({ counter, login, user }) => (
+const Header = ({ currentUser, hidden, login }) => (
   <div className='header'>
     <Link to='/'>
       <Logo />
@@ -19,7 +22,7 @@ const Header = ({ counter, login, user }) => (
           {name}
         </Link>
       ))}
-      {user ? (
+      {currentUser ? (
         <span className='option uppercase' onClick={() => login(false)}>
           sign out
         </span>
@@ -28,18 +31,15 @@ const Header = ({ counter, login, user }) => (
           sign in
         </Link>
       )}
-      <span className='cart-icon-container'>
-        <Bag className='cart-icon' />
-        <span className='counter'>{counter}</span>
-      </span>
+      <CartIcon />
     </div>
-    <CartDropDown />
+    {!hidden && <CartDropDown />}
   </div>
 );
 
-const mapStateToProps = ({ auth: { user }, cart: { cartItems } }) => ({
-  user,
-  counter: Object.values(cartItems).reduce((sum, { quantity }) => sum + quantity, 0),
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+  hidden: selectCartHidden,
 });
 
 export default connect(mapStateToProps, { login })(memo(Header));

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { memo, useState } from 'react';
 
 import './styles.scss';
 import CollectionItem from '../../components/collectionItem';
@@ -23,4 +23,4 @@ const Shop = () => {
   );
 };
 
-export default Shop;
+export default memo(Shop);
