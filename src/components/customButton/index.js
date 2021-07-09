@@ -1,10 +1,6 @@
 import { memo } from 'react';
-import './styles.scss';
+import CustomButtonContainer from './styles';
 
-const CustomButton = ({ title, color = 'black', ...rest }) => (
-  <button className={`btn ${color}`} {...rest}>
-    {title}
-  </button>
-);
+const CustomButton = ({ title, color = 'black', ...rest }) => <CustomButtonContainer {...rest}>{title}</CustomButtonContainer>;
 
 export default memo(CustomButton);

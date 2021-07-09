@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import './styles.scss';
 import { selectCartItems, selectCartTotal } from '../../store/entities/cart/selectors';
 import CheckoutItem from '../../components/checkoutItem';
+import StripeButton from '../../components/stripeButton';
 
 const Checkout = ({ cartItems, total }) => (
   <div className='checkout-page'>
@@ -19,6 +20,9 @@ const Checkout = ({ cartItems, total }) => (
       <CheckoutItem item={item} key={item.id} />
     ))}
     <div className='total'>Total ${total}</div>
+    <div className='stripe-button-container'>
+      <StripeButton amount={total} />
+    </div>
   </div>
 );
 

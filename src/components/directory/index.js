@@ -1,10 +1,12 @@
 import { memo } from 'react';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 import './style.scss';
 import MenuItem from '../menuItem';
-import sections from './sections';
+import { selectDirectoryItems } from '../../store/entities/directory/selectors';
 
-const Directory = () => (
+const Directory = ({ sections }) => (
   <div className='directory-menu justify-content-space'>
     {sections.map(({ id, ...rest }) => (
       <MenuItem key={id} {...rest} />
@@ -12,4 +14,8 @@ const Directory = () => (
   </div>
 );
 
-export default memo(Directory);
+const mapStateToProps = createStructuredSelector({
+  sections: selectDirectoryItems,
+});
+
+export default connect(mapStateToProps)(memo(Directory));

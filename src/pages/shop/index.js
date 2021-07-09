@@ -1,25 +1,15 @@
-import { memo, useState } from 'react';
+import { memo } from 'react';
+import { Route } from 'react-router';
 
-import './styles.scss';
-import CollectionItem from '../../components/collectionItem';
-import data from './data';
+import Collection from '../collection';
+import CollectionOverview from '../../components/collectionOverview';
 
-const Shop = () => {
-  const [collections] = useState(data);
+const Shop = ({ match }) => {
   return (
-    <div className='shop-page'>
-      <h1>Collections</h1>
-      {collections.map(({ id, items, routeName, title }) => (
-        <div className='collection' key={id}>
-          <h3>{title}</h3>
-          <div className='collection-items'>
-            {items.slice(0, 4).map((item, index) => (
-              <CollectionItem item={item} key={index} />
-            ))}
-          </div>
-        </div>
-      ))}
-    </div>
+    <>
+      <Route exact path={`${match.path}`} component={CollectionOverview} />
+      <Route path={`${match.path}/:collectionName`} component={Collection} />
+    </>
   );
 };
 
